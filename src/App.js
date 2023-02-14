@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 
 function App() {
+    const [value1, setValue1] = useState('Антон сопьется через')
     const [likes, setLikes] = useState(5)
-    const [value, setValue] = useState('долгов')
+    const [value, setValue] = useState('дней')
     function increment(){
         setLikes( likes + 1)
     }
@@ -11,6 +12,7 @@ function App() {
     }
     return (
     <div className="App">
+        <h1>{value1}</h1>
         <h1>{likes}</h1>
         <h1>{value}</h1>
         <input
