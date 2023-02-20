@@ -10,8 +10,8 @@ import MyInput from "./components/UI/input/MyInput";
 
 function App() {
     const [posts, setPosts] = useState([
-        {id: 1, title: 'Javascript', body: 'Description'},
-        {id: 2, title: 'Javascript 2', body: 'Description'},
+        {id: 1, title: 'Жопа Антона', body: '15 рублей/0.30$'},
+        {id: 2, title: 'Мнение Антона', body: '0 рублей/0.00$'},
     ])
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -36,17 +36,17 @@ function App() {
                 value = {title}
                 onChange={e => setTitle(e.target.value)}
                 type="text"
-                placeholder="Название поста"
+                placeholder="Название товара"
             />
             <MyInput
                 value = {body}
                 onChange={e => setBody(e.target.value)}
                 type="text"
-                placeholder="Описание поста"
+                placeholder="Цена товара"
             />
             <MyButton onClick={addNewPost}>Создать пост</MyButton>
         </form>
-        <PostList posts={posts} title="Список приколов 1"/>
+        <PostList posts={posts} title="Барахолка"/>
     </div>
   );
 }
