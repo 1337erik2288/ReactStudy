@@ -10,43 +10,36 @@ import MyInput from "./components/UI/input/MyInput";
 
 function App() {
     const [posts, setPosts] = useState([
-        {id: 1, title: 'Жопа Антона', body: '15 рублей/0.30$'},
-        {id: 2, title: 'Мнение Антона', body: '0 рублей/0.00$'},
+        {id: 1, title: 'Javascript', body: 'Description'},
+        {id: 2, title: 'React', body: 'Description'},
     ])
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+    const [post, setPost] = useState({title: '',body: ''})
 
 
     const addNewPost = (e) => {
         e.preventDefault()
-        const newPost = {
-            id: Date.now(),
-            title,
-            body
-        }
-        setPosts([...posts, newPost])
-        setTitle('')
-        setBody('')
+        setPosts([...posts, {...post, id: Date.now()}])
+        setPost({title: '',body: ''})
     }
 
     return (
     <div className="App">
         <form>
             <MyInput
-                value = {title}
-                onChange={e => setTitle(e.target.value)}
+                value = {post.title}
+                onChange={e => setPost({...post, title: e.target.value})}
                 type="text"
-                placeholder="Название товара"
+                placeholder="Название поста"
             />
             <MyInput
-                value = {body}
-                onChange={e => setBody(e.target.value)}
+                value = {post.body}
+                onChange={e => setPost({...post, body: e.target.value})}
                 type="text"
-                placeholder="Цена товара"
+                placeholder="Описание поста"
             />
             <MyButton onClick={addNewPost}>Создать пост</MyButton>
         </form>
-        <PostList posts={posts} title="Барахолка"/>
+        <PostList posts={posts} title="Список 1"/>
     </div>
   );
 }
