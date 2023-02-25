@@ -20,7 +20,7 @@ function App() {
     const [searchQuery, setSearchQuery] = useState('')
 
     function getSortedPosts(){
-        console.log('ЖЕСКА ОТРАБОТАЛ ДВЕ СМЕНЫ НА ЗАВОДЕ И СНОВА ЕБАШИТЬ ТУДА')
+        console.log('ЖЕСКА ОТРАБОТАЛ ДВЕ СМЕНЫ НА ЗАВОДЕ И СНОВА ЕБАШИТЬТУДА')
         if(selectedSort){
             return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
         }
