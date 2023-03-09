@@ -12,6 +12,8 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import {usePosts} from "./hooks/usePosts";
 import axios from "axios";
+import PostService from "./API/PostService";
+import Loader from "./components/UI/Loader/Loader";
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false);
     const sortedAndSearchedPosts = usePosts(posts,filter.sort, filter.query);
+    const [isPostsLoading, setIsPostsLoading] = useState(false);
 
     useEffect(() => {
         fetchPosts()
@@ -30,8 +33,10 @@ function App() {
     }
 
     async function fetchPosts() {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-        setPosts(response.data)
+        setIsPostsLoading(true);
+        const posts = await PostService.getAll();
+        setPosts(posts)
+        setIsPostsLoading(false);
     }
 
     const removePost = (post) => {
@@ -40,7 +45,6 @@ function App() {
 
     return (
     <div className="App">
-        <button onClick={fetchPosts}>GET POSTS</button>
         <MyButton style={{marginTop: 20}} onClick={() => setModal(true)}>
             Создать новый пост
         </MyButton>
@@ -53,7 +57,11 @@ function App() {
             filter={filter}
             setFilter={setFilter}
         />
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Список 1"/>
+        {isPostsLoading
+            ? <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}><Loader/></div>
+            : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Список 1"/>
+        }
+
     </div>
   );
 }
